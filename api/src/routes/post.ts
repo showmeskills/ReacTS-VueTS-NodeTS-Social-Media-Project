@@ -14,6 +14,8 @@ postRoutes.put("/:id/like",posts.like)
 //get a post
 postRoutes.get("/:id",posts.getPost)
 //get timeline posts
-postRoutes.get('/timeline/all',posts.getTimelinePost)
+postRoutes.get('/timeline/:userId',posts.getTimelinePost)
+//get one user all posts
+postRoutes.get("/profile/:username",posts.getOneUserAllPosts);
 
 export default postRoutes;

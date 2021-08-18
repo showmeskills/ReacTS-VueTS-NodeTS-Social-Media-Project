@@ -130,16 +130,15 @@ class Posts {
         }
     }
     async getTimelinePost(req: Request, res: Response){
-        console.log(req.params.id);
         try{
-            const currentUser = await Users.findById(req.body.userId);
+            const currentUser = await Users.findById(req.params.userId);
             const userPosts = await Post.find({
                 userId:currentUser._id,
             })
             const friendPosts = await Promise.all(
                 currentUser.followings.map((friendId:string)=>Post.find({userId:friendId}))
             )
-            res.json(userPosts.concat(...friendPosts))
+            res.status(200).json(userPosts.concat(...friendPosts))
         }catch(err){
             res.status(500).send({
                 data:{
@@ -148,6 +147,9 @@ class Posts {
                 }
             })
         }
+    }
+    async getOneUserAllPosts(req: Request, res: Response){
+
     }
 }
 

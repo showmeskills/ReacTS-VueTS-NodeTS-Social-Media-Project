@@ -9,7 +9,7 @@ usersRoutes.put('/:id',user.updataUser);
 usersRoutes.delete('/:id',user.deleteUser);
 //get a user
 usersRoutes.get('/:id',user.getUser);
-usersRoutes.get("/",user.getUsers)
+usersRoutes.get("/",user.getUsers);
 //follow a user
 usersRoutes.put("/:id/follow",user.followUser)
 //unfollow a user
