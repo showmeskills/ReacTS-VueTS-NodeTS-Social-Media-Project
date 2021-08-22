@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <NavBar />
-    <Featured/>
+    <Featured type="movie"/>
+    <List/>
+    <List/>
+    <List/>
+    <List/>
+    <List/>
   </div>
 </template>
 
@@ -9,10 +14,12 @@
 import { defineComponent } from "vue";
 import NavBar from "@/components/Navbar.vue";
 import Featured from "@/components/Featured.vue";
+import List from "@/components/List.vue";
 export default defineComponent({
   components: {
     NavBar,
-    Featured
+    Featured,
+    List
   },
   setup() {
     return {};
@@ -22,6 +29,6 @@ export default defineComponent({
 <style lang='scss' scoped>
 .home {
   background-color: var(--main-color);
-  height: 100%;
+  overflow: hidden;
 }
 </style>
