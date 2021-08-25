@@ -19,7 +19,7 @@ const Feed = (props: PropsWithChildren<FeedProps>) => {
             <div className="feedWrapper">
                 <Share />
                 {
-                    users&&posts&&posts.map((post: PostsData,) => {
+                    users&&posts&&posts.map((post: PostsData) => {
                         return (
                             <Post
                                 key={post.id}

@@ -1,8 +1,10 @@
+import { useHistory } from "react-router";
+
 import {RegisterContainer} from "./style/register";
 
 
 const Register =()=>{
-
+    const {push} = useHistory();
     return (
         <RegisterContainer>
                <div className="loginWrapper">
@@ -18,8 +20,12 @@ const Register =()=>{
                         <input type="email" placeholder="Email" className="loginInput"/>
                         <input type="password" placeholder="password" className="loginInput"/>
                         <input type="password" placeholder="Password Again" className="loginInput"/>
-                        <button className="loginButton">Sign Up</button>
-                        <button className="loginRegisterButton">Log into Account</button>
+                        <button className="loginButton"
+                            
+                        >Sign Up</button>
+                        <button className="loginRegisterButton"
+                            onClick={()=>push('/login')}
+                        >Log into Account</button>
                     </div>
                 </div>
             </div>

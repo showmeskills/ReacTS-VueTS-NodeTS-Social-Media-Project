@@ -1,9 +1,11 @@
-import { Search, Person,Chat,Notifications } from "@material-ui/icons"
+import { Search, Person,Chat,Notifications } from "@material-ui/icons";
+import {useHistory} from "react-router";
 import {Link} from "react-router-dom";
 import { TopbarContainer } from "./style/topbarStyle"
 
 const Topbar = () => {
     const oneImg = process.env.REACT_APP_PUBLIC_FOLDER +"/person/2.jpeg";
+    const {push} = useHistory();
     return (
         <TopbarContainer>
         <div className="topbarLeft">
@@ -35,7 +37,7 @@ const Topbar = () => {
                     <Notifications />
                     <span className="topbarIconBadge">1</span>
                 </div>
-                <img src={oneImg} alt=""/>
+                <img src={oneImg} alt="" onClick={()=>push("/profile/terry")} />
             </div>
         </div>
     </TopbarContainer>

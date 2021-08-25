@@ -1,24 +1,17 @@
-import axios from "axios";
-import { PropsWithChildren, useState, useEffect } from "react";
-
-
+import { useState, useEffect } from "react";
+import {useAxios} from "@/services/useAxios";
 import { Topbar, Siderbar, Rightbar, Feed } from "@/components";
 
 
 import { ProfileContainer } from "./style/profilestyle";
-import { PostsData, UsersData } from "@/mock/typings";
 
 
 
-interface ProfileProps {
-    posts?: PostsData[]
-    users?: UsersData[]
-}
 
-
-const Profile = (props: PropsWithChildren<ProfileProps>) => {
+const Profile = () => {
     const [users, setUsers] = useState();
     const [posts, setPosts] = useState();
+    const {axios} = useAxios();
     const oneUser = process.env.REACT_APP_PUBLIC_FOLDER + "post/1.jpeg";
     const onePost = process.env.REACT_APP_PUBLIC_FOLDER + "/person/1.jpeg";
     const requestUsersAndPosts = async () => {
@@ -32,8 +25,9 @@ const Profile = (props: PropsWithChildren<ProfileProps>) => {
         }
 
     }
+
     useEffect(() => {
-        requestUsersAndPosts();
+        //requestUsersAndPosts();
     }, [])
     return (
         <>
