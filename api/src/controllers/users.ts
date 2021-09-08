@@ -7,7 +7,7 @@ class User {
         if (req.body.userId === req.params.id || req.body.isAdmin) {
             if (req.body.password) {
                 try {
-                    const user = await Users.findById(req.body.userId)
+                    const user:any = await Users.findById(req.body.userId)
                     const { password: hash } = user;
                     const result = await tools.compare(req.body.password, hash);
                     if (result) {
@@ -144,7 +144,7 @@ class User {
     async followUser(req: Request, res: Response) {
         if (req.body.userId !== req.params.id) {
             try {
-                const user = await Users.findById(req.params.id);
+                const user:any = await Users.findById(req.params.id);
                 const currentUser = await Users.findById(req.body.userId);
                 if (!user.followers.includes(req.body.userId)) {
                     await user.updateOne({
@@ -189,7 +189,7 @@ class User {
     async unFollowUser(req: Request, res: Response){
         if (req.body.userId !== req.params.id) {
             try {
-                const user = await Users.findById(req.params.id);
+                const user:any = await Users.findById(req.params.id);
                 const currentUser = await Users.findById(req.body.userId);
                 if (user.followers.includes(req.body.userId)) {
                     await user.updateOne({

@@ -61,7 +61,7 @@ class Auth {
     async login(req:Request,res:Response){
         const {email,password} = req.body
         try{
-            const user = await User.findOne({
+            const user:any = await User.findOne({
                 email,
             })
             if(user.email){

@@ -1,7 +1,17 @@
 import Post from "../models/Post";
 import Users from "../models/Users";
 import { Response, Request } from 'express';
-class Posts {
+
+export interface IPosts{
+    createPost(req:Request, res:Response):void;
+    updatePost(req:Request, res:Response):void;
+    deletePost(req:Request, res:Response):void;
+    like(req:Request, res:Response):void;
+    getPost(req:Request, res:Response):void;
+    getTimelinePost(req:Request, res:Response):void;
+    getOneUserAllPosts(req:Request, res:Response):void;
+}
+export class Posts implements IPosts {
     async createPost(req: Request, res: Response) {
         const newPost = new Post(req.body);
         try {
@@ -23,7 +33,7 @@ class Posts {
     }
     async updatePost(req: Request, res: Response) {
         try {
-            const post = await Post.findById(req.params.id);//post:_id
+            const post:any = await Post.findById(req.params.id);//post:_id
             //post表中的userId === req.body.userId?
             if (post.userId === req.body.userId) {
                 await post.updateOne({
@@ -51,7 +61,7 @@ class Posts {
     }
     async deletePost(req: Request, res: Response) {
         try {
-            const post = await Post.findById(req.params.id);//post:_id
+            const post:any = await Post.findById(req.params.id);//post:_id
             //post表中的userId === req.body.userId?
             if (post.userId === req.body.userId) {
                 await post.deleteOne();
@@ -77,7 +87,7 @@ class Posts {
     }
     async like (req: Request, res: Response){
         try{
-            const post = await Post.findById(req.params.id);
+            const post:any = await Post.findById(req.params.id);
             if(!post.likes.includes(req.body.userId)){
                 await post.updateOne({
                     $push:{
@@ -131,8 +141,8 @@ class Posts {
     }
     async getTimelinePost(req: Request, res: Response){
         try{
-            const currentUser = await Users.findById(req.params.userId);
-            const userPosts = await Post.find({
+            const currentUser:any = await Users.findById(req.params.userId);
+            const userPosts:any = await Post.find({
                 userId:currentUser._id,
             })
             const friendPosts = await Promise.all(
@@ -149,7 +159,13 @@ class Posts {
         }
     }
     async getOneUserAllPosts(req: Request, res: Response){
-
+        try{
+            const user = await Users.findOne({username:req.params.username})
+            const posts = await Post.find({userId:user._id});
+            res.status(200).json(posts);
+        }catch(err){
+            res.status(500).json(err);
+        }
     }
 }
 
